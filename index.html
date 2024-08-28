@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>noir</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito:400,700|Titan+One|Creepster|Satisfy|Eczar:700" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="mainBody">
+        <div class="textContainer">
+            <div class="normtext">noir</div>
+        </div>
+        <div class="codecontainer" id="cc">
+            <div class="idInputContainer">
+                <input id="gcode" class="idInput" placeholder="Game ID" />
+            </div>
+            <div class="nameInputContainer">
+                <input id="gname" class="nameInput" placeholder="Nickname" />
+            </div>
+            <div class="joinButton" onclick="join();" role="button">
+                <div class="btext">Join</div>
+            </div>
+        </div>
+        <div id="ctrlpanel"></div>
+        <div class="normtext" id="status">Status: Loading...</div>
+        <div class="errorBar" id="error"></div>
+    </div>
+
+    <script type="module">
+        import {
+            initializeApp,
+            deleteApp,
+        } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+        import {
+            getAuth,
+            signInWithCustomToken,
+            setPersistence,
+        } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
+        import {
+            getDatabase,
+            ref,
+            set,
+            get,
+            onValue,
+        } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
+
+        window.initializeApp = initializeApp;
+        window.deleteApp = deleteApp;
+        window.getAuth = getAuth;
+        window.signInWithCustomToken = signInWithCustomToken;
+        window.setPersistence = setPersistence;
+        window.getDatabase = getDatabase;
+        window.ref = ref;
+        window.set = set;
+        window.get = get;
+        window.onValue = onValue;
+    </script>
+
+    <script>
+        function join() {
+            const cin = document.getElementById("gcode").value;
+            const name = document.getElementById("gname").value;
+            joinGame(cin, name);
+        }
+
+        function errorBar(error) {
+            const e = document.getElementById("error");
+            e.innerText = error;
+            e.style.transform = "translateY(-100%)";
+            setTimeout(() => {
+                e.style.transform = "translateY(0%)";
+            }, 4000);
+        }
+    </script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
